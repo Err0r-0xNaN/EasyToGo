@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    
+}
+
+.contain{
+    width: 1260px;
+    height: 100%;
+}
+.marginCenter{
+    margin: 0 auto;
+}
+
