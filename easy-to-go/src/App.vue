@@ -29,7 +29,7 @@ window.onscroll = () => { /* 页面滚动检测 */
     <headNav></headNav>
   </div>
   
-  <div class="mainBody">
+  <div id="MainBody" class="mainBody">
     <RouterView></RouterView>
   </div>
   

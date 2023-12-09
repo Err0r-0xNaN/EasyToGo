@@ -1,17 +1,32 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-body{
-    
+body {
 }
+.nav {
+    z-index: 2;
+    /* position: absolute; */
+    width: 100%;
+}
+.navFixed {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 
-.contain{
-    width: 1260px;
-    height: 100%;
-}
-.marginCenter{
-    margin: 0 auto;
-}
+    transform: translateY(-64px);
 
+    /* height: 0; */
+    overflow: hidden;
+
+    transition: transform 0.8s;
+}
+.navPanel {
+    background-color: red;
+    height: 64px;
+    border-radius: 0 0 7px 7px;
+
+    line-height: 64px;
+}

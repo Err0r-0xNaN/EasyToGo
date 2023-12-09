@@ -6,29 +6,10 @@
     --Alpha-LoginPanel: 0.85;
 }
 
-.nav{
-    z-index: 2;
-    position: absolute;
-    width: 100%;
+.contain{
+    width: 1260px;
+    height: 100%;
 }
-.navFixed{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-
-    transform: translateY(-64px);
-
-    /* height: 0; */
-    overflow: hidden;
-
-    transition: transform .8s;
-}
-
-.navPanel{
-    background-color: red;
-    height: 64px;
-    border-radius: 0 0 7px 7px;
-    
-    line-height: 64px;
+.marginCenter{
+    margin: 0 auto;
 }
