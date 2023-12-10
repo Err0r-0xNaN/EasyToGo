@@ -1,22 +1,22 @@
 package cc.nanoic.servereasytogo.controller;
 
+import cc.nanoic.servereasytogo.common.Result;
 import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
-/*@RequestMapping("/")*/
+
 public class WebController {
 
-    @GetMapping("/login")
-    @CrossOrigin()
-    public String login(@RequestBody Map<String, String> data/*,@CookieValue (name = "token") String token*/){
-        String username = data.get("username");
+    @RequestMapping("/login")
+    public Result login(@RequestBody Map<String, Object> data){
+        String username = data.get("username").toString();
+        String password = data.get("password").toString();
 
-        System.out.println(username);
-        return username;
+        return Result.success("请求成功");
     }
 }

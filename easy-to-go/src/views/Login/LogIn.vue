@@ -3,7 +3,7 @@
         <div class="background-image"></div>
         <div class="form-container">
             <div id="ErrorBox" :class="errorBox" v-show="errorShow">
-                <img  />
+                <img />
                 {{ FormErrorInfo }}
             </div>
             <form>
@@ -15,11 +15,17 @@
                     <label for="password">密码：</label>
                     <input type="password" id="password" v-model="password" />
                 </div>
+                <div class="form-group">
+                    <label for="chooseBox">单选框：</label>
+                    <input type="checkbox" id="chooseBox" v-model="checkbox" />
+                </div>
                 <button @click.prevent="submitForm()" type="submit">Login</button>
                 <p :style="{ paddingTop: '10px' }">
                     没有账号?
                     <a href="/register">去注册</a>
                 </p>
+
+
             </form>
         </div>
     </div>
@@ -35,16 +41,16 @@ export default {
         return {
             errorShow: false,
             FormErrorInfo: '',
-            errorBox: 'errorBox'
+            errorBox: 'errorBox',
         };
     },
     methods: {
-        submitForm: function() {
-            console.log(this.username == '',this.username == undefined && this.password == undefined,this.username == undefined,this.password == undefined);
-            console.log(this.username,this.password);
+        submitForm: function () {
+            console.log(this.username == '', this.username == undefined && this.password == undefined, this.username == undefined, this.password == undefined);
+            console.log(this.username, this.password);
             if ((this.username == undefined || this.username == '') && (this.password == undefined || this.password == '')) {
                 this.errorShow = true;
-                this.FormErrorInfo = "账号密码不能为空！";
+                this.FormErrorInfo = '账号密码不能为空！';
                 var elem = document.getElementById('ErrorBox');
                 if (elem) {
                     elem.classList.add('shake');
@@ -55,7 +61,7 @@ export default {
                 }
             } else if (this.username == undefined || this.username == '') {
                 this.errorShow = true;
-                this.FormErrorInfo = "账号不能为空！";
+                this.FormErrorInfo = '账号不能为空！';
                 var elem = document.getElementById('username');
                 if (elem) {
                     elem.classList.add('shake');
@@ -75,12 +81,23 @@ export default {
                         this.errorShow = false;
                     }, 2800);
                 }
-            }
-            else if(this.username != undefined && this.password != undefined){
+            } else if (this.username != undefined && this.password != undefined) {
                 /* if(this.username != ) */
-                console.log('ok');
+                /* console.log('ok'); */
+
+                // 在Vue组件中定义一个方法，使用axios发送GET请求
+                axios.post('http://localhost:9090/login', {
+                    username: this.username,
+                    password: this.password
+                },{"Content-Type":"application/x-www-form-urlencoded"})
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+                
             }
-            
         },
     },
 };

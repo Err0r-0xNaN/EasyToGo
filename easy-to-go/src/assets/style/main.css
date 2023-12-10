@@ -21,7 +21,7 @@ body {
     /* height: 0; */
     overflow: hidden;
 
-    transition: transform 0.8s;
+    transition: transform 0.4s;
 }
 .navPanel {
     background-color: red;
