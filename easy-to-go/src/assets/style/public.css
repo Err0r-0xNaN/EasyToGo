@@ -4,12 +4,70 @@
 
     /* Alpha */
     --Alpha-LoginPanel: 0.85;
+
+    
+
+    /* // Color // */
+    /* Link */
+    --Link-TextColor: #6600ff;
+    --Link-TextColor-hover: #66ccff;
+    /* Border */
+    --Border-Darkgray: #d3d1d1;
+    --Border-Darkgray-focus: #adadad;
+    /*  */
+    --Background-type-small: #f3f7fb;
+}
+/* 链接 ======================================================================== */
+a{
+    text-decoration: none;
+    color: var(--Link-TextColor);
+}
+a:hover{
+    color: var(--Link-TextColor-hover);
+    filter: brightness(130%);
+}
+/* 自定义 ======================================================================= */
+.flex{
+    display: flex;
 }
 
 .contain{
     width: 1260px;
     height: 100%;
 }
+
 .marginCenter{
     margin: 0 auto;
+}
+.flexCenter{
+    justify-content: center;
+}
+.w100{
+    width: 100%;
+}
+/* 摇晃 */
+.shake {
+    animation: shake 800ms ease-in-out;
+}
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(+2px, -2px, 0);
+    }
+    30%,
+    70% {
+        transform: translate3d(-4px, +1px, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(+4px, -2px, 0);
+    }
+    50% {
+        transform: translate3d(-4px, 0, 0);
+    }
 }

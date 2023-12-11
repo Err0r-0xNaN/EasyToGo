@@ -1,5 +1,5 @@
 <template>
-    <div class="panelBox">
+    <div class="panelBox contain marginCenter">
         
         <h3>{{ Title }}</h3>
     </div>

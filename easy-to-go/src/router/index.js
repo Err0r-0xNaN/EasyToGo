@@ -3,7 +3,8 @@ import {
   createWebHistory,
 } from 'vue-router';
 
-import LoginView from '../views/Login/LogIn.vue';
+import LoginView from '../views/Log/LogIn.vue';
+import RegisterView from '../views/Log/Register.vue';
 import IndexView from '../views/public/index.vue';
 
 const router = createRouter({
@@ -23,6 +24,14 @@ const router = createRouter({
       component: LoginView,
       meta: {
         title: 'E通达 - 登录'
+      }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+      meta: {
+        title: 'E通达 - 注册'
       }
     }
   ]
