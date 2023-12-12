@@ -13,6 +13,12 @@ import java.util.List;
 @Service
 public class UserService {
 
+    /***
+     * 加密功能
+     *
+     */
+
+
     @Autowired
     UserMapper userMapper;
 
@@ -36,10 +42,11 @@ public class UserService {
         return userMapper.selectByUsername(username);
     }
 
+    /* 注册，采用 md5(base64)加密 */
+    //TODO
     public void registerUAP(String username, String password) {
-        String userName = "";
         String passWord = password;
-        User userInfo = userMapper.selectByUsername(userName);
+        User userInfo = userMapper.selectByUsername(username);
         if(userInfo == null){
             //数据库插入用户数据
             /*userMapper.insert();*/
@@ -47,6 +54,11 @@ public class UserService {
         else{
             throw new ServiceException("用户已存在");
         }
+    }
+
+    public void registerEmail(String username, String password) {
+        User userInfo = userMapper.selectByEmail(username);
+        System.out.println(userInfo);
     }
 
     public User login(User user){
@@ -61,7 +73,9 @@ public class UserService {
         }
     }
 
-    public void registerEmail(String username, String password) {
-        User userInfo = userMapper.selectByEmail(username);
+
+
+    public User selectByEmail(String username) {
+        return userMapper.selectByEmail(username);
     }
 }

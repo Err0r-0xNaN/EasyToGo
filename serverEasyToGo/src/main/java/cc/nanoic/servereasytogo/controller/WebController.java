@@ -30,7 +30,10 @@ public class WebController {
 
     @PostMapping("/register")
     public Result login(@RequestBody User data){
-        if(data.getRegisterType().equals("uADNp")){
+        System.out.println("Type: -> " + data.getRegisterType() +
+                "\nTypeEqual uANDp -> " + data.getRegisterType().equals("uADNp") +
+                "\nTypeEqual email -> " + data.getRegisterType().equals("email"));
+        if(data.getRegisterType().replaceAll("\\p{C}","").equals("uANDp")){
             if(StrUtil.isBlank(data.getUsername()) || StrUtil.isBlank(data.getPassword())){
                 return Result.error("用户名或密码不能为空!");
             }
@@ -45,15 +48,17 @@ public class WebController {
             if(StrUtil.isBlank(data.getUsername()) || StrUtil.isBlank(data.getPassword())){
                 return Result.error("用户名或密码不能为空!");
             }
-            else if(userService.selectByUsername(data.getUsername())!=null){
-                return Result.error("用户名已被注册!");
+            else if(userService.selectByEmail(data.getUsername())!=null){
+                return Result.error("邮箱已被注册!");
             }
             else{
                 userService.registerEmail(data.getUsername(), data.getPassword());
+                return Result.success(userService.selectByEmail(data.getUsername()));
             }
         }
         else{
-            throw new ServiceException("我没传这类型捏...怎么绘世呢🤔...将此错误信息截图给网站管理员");
+            return Result.error(Result.CODE_TYPE_ERROR,
+                    "我没传这类型捏...怎么绘世呢🤔...请将此错误信息反馈给网站管理员");
         }
 
         return Result.success();

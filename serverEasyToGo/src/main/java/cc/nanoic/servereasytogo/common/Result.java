@@ -15,6 +15,8 @@ public class Result {
     public static final String CODE_SUCCESS = "200";
     /* 401 - 认证错误 */
     public static final String CODE_AUTH_ERROR = "401";
+    /* 402 - 类型异常 */
+    public static final String CODE_TYPE_ERROR = "402";
 
     public static final String CODE_SYS_ERROR = "500";/* 500 - 系统错误 */
 
