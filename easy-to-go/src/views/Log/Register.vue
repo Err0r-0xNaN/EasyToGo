@@ -10,7 +10,7 @@
             <!-- 转换登陆 -->
             <div class="line_group">
                 已有帐号？
-                <a href="/login">
+                <a style="cursor: pointer;" @click="$router.push('/login')">
                     立即登录
                     <img src="@/assets/icons/Log/changeToLogIn.png" style="height: 16px; margin: auto 2px; position: relative; top: 2px" />
                 </a>
@@ -229,6 +229,7 @@ export default {
                 } else {
                     /* 注册功能 */
                     /* console.log(userEmail,passWord); */
+                    /* this.$request.post('/') */
                 }
             }
         },

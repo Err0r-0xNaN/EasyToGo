@@ -36,4 +36,7 @@ public interface UserMapper {
 
     @Select("select * from `user` where username = #{username}")
     User selectByUsername(String username);
+
+    @Select("select * from `user` where email = #{username}")
+    User selectByEmail(String username);
 }
