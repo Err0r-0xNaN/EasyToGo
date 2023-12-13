@@ -88,6 +88,8 @@
 </template>
 
 <script>
+import request from '@/utils/request.js';
+
 export default {
     data() {
         return {
@@ -168,8 +170,10 @@ export default {
                         /* this.errorTips = false; */
                     }, 2000);
                 } else {
-                    /* 注册功能 */
-                    /* console.log(userName,passWord); */
+                    console.log("OK--")
+                    request.get("user/selectAll").then(res => {
+                        console.log(res)
+                    });
                 }
             } else if (this.regis_type == 'reg_email') {
                 /* console.log(userEmail) */
@@ -227,9 +231,8 @@ export default {
                         /* this.errorTips = false; */
                     }, 2000);
                 } else {
-                    /* 注册功能 */
-                    /* console.log(userEmail,passWord); */
-                    /* this.$request.post('/') */
+                    
+
                 }
             }
         },
