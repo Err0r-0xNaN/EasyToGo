@@ -146,7 +146,10 @@ export default {
                         { 'Content-Type': 'application/x-www-form-urlencoded' }
                     )
                     .then(response => {
-                        console.log(response.data);
+                        console.log(response.data.statusCode);
+                        /* if(response.data.statusCode=='401'){
+                            console.log("Emmmm!");
+                        } */
                     })
                     .catch(error => {
                         console.log(error);

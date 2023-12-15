@@ -1,10 +1,8 @@
 package cc.nanoic.servereasytogo.service;
 
-import cc.nanoic.servereasytogo.common.Result;
 import cc.nanoic.servereasytogo.entity.User;
 import cc.nanoic.servereasytogo.exception.ServiceException;
 import cc.nanoic.servereasytogo.mapper.UserMapper;
-import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +10,12 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    /***
+     * 加密功能
+     *
+     */
+
 
     @Autowired
     UserMapper userMapper;
@@ -36,32 +40,26 @@ public class UserService {
         return userMapper.selectByUsername(username);
     }
 
+    /* 注册，采用 md5(base64)加密 */
     public void registerUAP(String username, String password) {
-        String userName = "";
-        String passWord = password;
-        User userInfo = userMapper.selectByUsername(userName);
+        User userInfo = userMapper.selectByUsername(username);
         if(userInfo == null){
             //数据库插入用户数据
             /*userMapper.insert();*/
+            //TODO
+            throw new ServiceException("注册功能//TODO");
         }
         else{
             throw new ServiceException("用户已存在");
         }
     }
 
-    public User login(User user){
-        User userInfo = userMapper.selectByUsername(user.getUsername());
-        if(userInfo == null){
-            throw new ServiceException("用户不存在");
-        } else if(!user.getPassword().equals(userInfo.getPassword())){
-            throw new ServiceException("用户名或密码错误!");
-        }
-        else{
-            return userInfo;
-        }
-    }
-
     public void registerEmail(String username, String password) {
         User userInfo = userMapper.selectByEmail(username);
+        System.out.println(userInfo);
+    }
+
+    public User selectByEmail(String username) {
+        return userMapper.selectByEmail(username);
     }
 }

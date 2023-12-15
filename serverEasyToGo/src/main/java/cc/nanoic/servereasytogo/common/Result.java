@@ -21,6 +21,7 @@ public class Result {
     public static final String CODE_SQL_CONNECT_ERROR = "501";/* 501 - SQL数据库连接错误 */
 
     public static final String CODE_SQL_ERROR = "502";/* 502 - SQL数据库操作错误 */
+    public static final String CODE_TYPE_ERROR = "503";
 
     private String statusCode;
     private String msg;
