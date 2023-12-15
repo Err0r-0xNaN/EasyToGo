@@ -12,7 +12,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/register");
+                .excludePathPatterns("/register","/login");
         super.addInterceptors(registry);
     }
 
