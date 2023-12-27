@@ -6,13 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+/**
+ * @Description:身份认证，防止越权访问
+ * @Author: Nanoic
+ * @Date: 2023-12-25
+ * @FileName: InterceptorConfig
+ **/
 @Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Override
-    protected void addInterceptors(InterceptorRegistry registry){
+    protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/register","/login");
+                .excludePathPatterns("/checkEmail", "/register", "/login", "/", "/**");
         super.addInterceptors(registry);
     }
 
@@ -20,5 +26,4 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
     public JwtInterceptor jwtInterceptor() {
         return new JwtInterceptor();
     }
-
 }

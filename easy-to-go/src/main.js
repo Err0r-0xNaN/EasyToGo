@@ -1,3 +1,8 @@
+/*
+ * @Date: 2023-12-12 08:31:32
+ * @LastEditTime: 2023-12-24 16:51:48
+ * @FilePath: \EasyToGo\easy-to-go\src\main.js
+ */
 import './assets/style/main.css';
 import './assets/style/public.css';
 
@@ -11,10 +16,3 @@ const app = createApp(App)
 app.use(router)
 
 app.mount('#app')
-
-router.beforeEach((to, from, next) => {
-    if (to.meta.title) { //拦截后设置标题
-      document.title = to.meta.title
-    }
-    next()
-})

@@ -16,6 +16,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/**
+ * @Description:
+ * @Author: Nanoic
+ * @Date: 2023-12-25
+ * @FileName: JwtInterceptor
+ **/
 public class JwtInterceptor implements HandlerInterceptor {
 
     @Resource
@@ -36,7 +42,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }catch (JWTDecodeException j){
             throw new ServiceException("401", "JWT解码失败! [错误码：Jx02]");
         }
-        User user = userMapper.selectById(userId);
+        User user = userMapper.selectById(Integer.valueOf(userId));
         if(user == null){
             throw new ServiceException("401", "JWT异常! [错误码：Jx03]");
         }
@@ -51,3 +57,4 @@ public class JwtInterceptor implements HandlerInterceptor {
 
 
 }
+

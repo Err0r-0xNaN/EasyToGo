@@ -5,30 +5,26 @@
 
 body {
 }
+#MainBody{
+    min-height: 100vh;
+}
 .nav {
     z-index: 2;
     /* position: absolute; */
     width: 100%;
 }
-.navFixed {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-
-    transform: translateY(-64px);
-
-    /* height: 0; */
-    overflow: hidden;
-
-    transition: transform 0.4s;
-}
 .navPanel {
-    background-color: red;
     height: 64px;
     border-radius: 0 0 7px 7px;
+    background-color: rgba(255, 255, 255, .5);
 
     line-height: 64px;
+    position: relative;
+    backdrop-filter: blur(3px);
+    box-shadow: var(--shadow-Nav);
+}
+.navPanel *{
+    opacity: 1;
 }
 
 /* ============================== 输入框 ============================== */
@@ -36,13 +32,40 @@ input.input_type_default {
     border: 0;
     border-bottom: 1px solid darkgray;
     outline: 0;
-    padding: 8px 0 8px 10px;
+    padding: 18px 10px 12px 10px;
+    width: 80%;
 }
 /* 隐藏Placeholder */
 input.input_type_default:focus::placeholder {
     color: rgba(0, 0, 0, 0);
 }
-/* ============================== 输入框 ============================== */
+input.input_type_default:focus {
+    transition: .3s;
+    border: 1px solid var(--Border-focus);
+}
+/* ============================== 输入框 + 按钮 ============================== */
+.inline-input-panel{
+    display: flex;
+    padding: 18px 10px 12px 10px;
+    justify-content: center;
+}
+.inline-input-panel input.input_type_inline{
+    padding: 18px 10px 12px 10px;
+    margin: 0 5px 0 0;
+}
+.btn_type_inline {
+    padding: 18px 0 12px;
+    text-align: center;
+    /* background-color: #1772f6; */
+    height: 55px;
+    border-radius: 4px;
+    border: 1px solid #1772f6;
+    /* color: white; */
+    transition: all 0.3s;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 0 5px;
+}
 
 /*  ============================== 按钮 ==============================  */
 .btn_type_default {
@@ -50,14 +73,16 @@ input.input_type_default:focus::placeholder {
     text-align: center;
     background-color: #1772f6;
     height: 50px;
-    min-width: 50px;
+    min-width: 80%;
     border-radius: 4px;
     border: 0px;
     color: white;
     transition: all 0.3s;
+    font-size: 20px;
+    font-weight: 700;
 }
 .btn_type_default:hover {
-    background-color: #37d651;
+    background-color: #1056c1;
     color: white;
     transition: all 0.3s;
 }

@@ -1,5 +1,11 @@
 package cc.nanoic.servereasytogo.exception;
 
+/**
+ * @Description:
+ * @Author: Nanoic
+ * @Date: 2023-12-25
+ * @FileName: ServiceException
+ **/
 public class ServiceException extends RuntimeException{
 
     private String code;

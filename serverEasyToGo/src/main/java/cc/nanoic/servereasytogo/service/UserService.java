@@ -6,60 +6,54 @@ import cc.nanoic.servereasytogo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
+/**
+ * @Description:User表Service
+ * @Author: Nanoic
+ * @Date: 2023-12-25
+ * @FileName: UserService
+ **/
 @Service
 public class UserService {
-
-    /***
-     * 加密功能
-     *
-     */
-
-
     @Autowired
     UserMapper userMapper;
 
-    public void insertUser(User user){
-        userMapper.insert(user);
+    public User selectById(User user) {
+        return userMapper.selectById(user.getUuid());
     }
 
-    public void updateUser(User user){
-        userMapper.update(user);
-    }
-
-    public void delete(Integer uuid) {
-        userMapper.delete(uuid);
+    public User selectByEmail(User data) {
+        return userMapper.selectByEmail(data);
     }
 
     public List<User> selectAll() {
         return userMapper.selectAll();
     }
 
-    public User selectByUsername(String username) {
-        return userMapper.selectByUsername(username);
-    }
-
-    /* 注册，采用 md5(base64)加密 */
-    public void registerUAP(String username, String password) {
-        User userInfo = userMapper.selectByUsername(username);
-        if(userInfo == null){
-            //数据库插入用户数据
-            /*userMapper.insert();*/
-            //TODO
-            throw new ServiceException("注册功能//TODO");
-        }
-        else{
-            throw new ServiceException("用户已存在");
+    public void register(User user) {
+        try{
+            userMapper.register(user);
+        } catch (Exception e) {
+            throw new ServiceException("写入数据库失败!");
         }
     }
 
-    public void registerEmail(String username, String password) {
-        User userInfo = userMapper.selectByEmail(username);
-        System.out.println(userInfo);
+    public void updateVerifyCode(User user) {
+        try{
+            userMapper.updateVerifyCode(user);
+        } catch (Exception e) {
+            throw new ServiceException("更新验证码失败!");
+        }
     }
 
-    public User selectByEmail(String username) {
-        return userMapper.selectByEmail(username);
+    public void updateVerifyActive(User user) {
+        try{
+            userMapper.updateVerifyActiveStatus(user);
+        } catch (Exception e) {
+            System.out.println(user.getEmail() + "：更新激活状态失败!\r\nERR0R：" + e.getMessage());
+            throw new ServiceException("更新激活状态失败!请及时将后方错误信息反馈给网站管理员：" + e.getMessage());
+        }
     }
 }

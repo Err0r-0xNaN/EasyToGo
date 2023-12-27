@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * @Description:
  * @Author: Nanoic
- * @Date: 2023-12-15
+ * @Date: 2023-12-25
  * @FileName: TokenUtils
  **/
 
@@ -55,7 +55,7 @@ public class TokenUtils {
             String token = request.getHeader("token");
             if(StrUtil.isNotBlank(token)){
                 String userId = com.auth0.jwt.JWT.decode(token).getAudience().get(0);
-                return staticUserMapper.selectById(userId);
+                return staticUserMapper.selectById(Integer.valueOf(userId));
             }
         }catch (Exception e){
             return null;

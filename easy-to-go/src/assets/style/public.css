@@ -1,6 +1,8 @@
 :root{
+    
     /* Shadow */
     --shadow-Panel: 1px 1px 5px 1px #00000076;
+    --shadow-Nav: 0px -2px 7px 0px #000000ab;
 
     /* Alpha */
     --Alpha-LoginPanel: 0.85;
@@ -9,13 +11,19 @@
 
     /* // Color // */
     /* Link */
-    --Link-TextColor: #6600ff;
-    --Link-TextColor-hover: #66ccff;
+    --Link-TextColor: #1772f6;
+    --Link-TextColor-hover: #1056c1;
     /* Border */
     --Border-Darkgray: #d3d1d1;
     --Border-Darkgray-focus: #adadad;
+    --Border-focus:#0074cc;
     /*  */
     --Background-type-small: #f3f7fb;
+    
+
+    /* Console-Theme */
+    --console-panel-dark: #323232;
+    
 }
 /* 链接 ======================================================================== */
 a{
@@ -24,7 +32,7 @@ a{
 }
 a:hover{
     color: var(--Link-TextColor-hover);
-    filter: brightness(130%);
+    /* filter: brightness(130%); */
 }
 /* 自定义 ======================================================================= */
 .flex{
@@ -44,6 +52,24 @@ a:hover{
 }
 .w100{
     width: 100%;
+}
+
+.topBlock{
+    margin: 60px 0;
+    overflow: hidden;
+}
+
+.center{
+    text-align: center;
+}
+
+.tipBox{
+    border: 1px solid red;
+    border-radius: 6px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px 0;
+
 }
 /* 摇晃 */
 .shake {

@@ -1,9 +1,33 @@
 server:
   port: 9090
 
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+
 spring:
+  thymeleaf: cache=false
   datasource:
     url: jdbc:mysql://localhost:3306/easytd
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: aq123edc
+
+  mail:
+    host: smtp.qq.com
+    #发送者
+    username: 2026256242@qq.com
+    #授权码
+    password: virglawamlxqcgdj
+    #QQ：465或587
+    port: 465
+    #UTF-8
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            #ssl
+            enable: true
+            required: false
+        debug: false

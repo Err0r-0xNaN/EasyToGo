@@ -1,45 +1,38 @@
 package cc.nanoic.servereasytogo.mapper;
 
 import cc.nanoic.servereasytogo.entity.User;
+import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @Description:User表Mapper
+ * @Author: Nanoic
+ * @Date: 2023-12-25
+ * @FileName: UserMapper
+ **/
 @Mapper
 public interface UserMapper {
 
-    //目前仅支持插入用户名、密码，后期有需要拓展
-    /*插入数据*/
-    @Insert("insert into `user` (username, password) " +
-            "values (#{username}, #{password})")
-    void insert(User user);
+    @Select("SELECT * FROM `user` WHERE uuid = #{uuid}")
+    User selectById(@Param("uuid") Integer uuid);
 
+    @Select("select * from `user` where email = #{email} order by uuid")
+    User selectByEmail(User user);
 
-
-    /*@Select("")*/
-    @Update("update `user` set nickname = #{nickname}, " +
-            "sex = #{sex}, password = #{password}, " +
-            "avatar = #{avatar}, email = #{email} " +
-            "where uuid = #{uuid}")
-    void update(User user);
-
-    @Delete("delete from `user` where uuid = #{uuid}")
-    void delete(Integer uuid);
-
-    /* 查个人 */
-
-
-    /* 查全部 */
     @Select("select * from `user` order by uuid desc")
     List<User> selectAll();
 
-    @Select("select * from `user` where username = #{username}")
-    User selectByUsername(String username);
+    /* 添加数据 */
+    @Insert("insert into `user` (username, password, email, emailVerifyCode) value (#{username}, #{password}, #{email}, #{emailVerifyCode})")
+    void register(User user);
 
-    @Select("select * from `user` where email = #{username}")
-    User selectByEmail(String username);
+    /* 更新验证码 */
+    @Update("update `user` set emailVerifyCode = #{emailVerifyCode} where email = #{email}")
+    void updateVerifyCode(User user);
 
-    @Select("select * from `user` where email = #{Id}")
-    User selectById(String username);
+
+    @Update("update `user` set emailActived = 1, emailVerifyCode = 114514, password = #{password}, registerDate = #{registerDate} where email = #{email}")
+    void updateVerifyActiveStatus(User user);
 }
