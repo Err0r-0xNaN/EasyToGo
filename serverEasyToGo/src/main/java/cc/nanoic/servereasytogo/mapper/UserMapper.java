@@ -1,7 +1,6 @@
 package cc.nanoic.servereasytogo.mapper;
 
 import cc.nanoic.servereasytogo.entity.User;
-import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,24 +14,24 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT * FROM `user` WHERE uuid = #{uuid}")
+    @Select("SELECT * FROM `userinfo` WHERE uuid = #{uuid}")
     User selectById(@Param("uuid") Integer uuid);
 
-    @Select("select * from `user` where email = #{email} order by uuid")
-    User selectByEmail(User user);
+    /* 写入默认数据 */
+    @Insert("insert into `userinfo` (password, email) value (#{password}, #{email})")
+    void register_checkEmail(User user);
 
-    @Select("select * from `user` order by uuid desc")
-    List<User> selectAll();
+    //查询用户数量
+    @Select("select uuid from `userinfo` order by uuid desc")
+    Integer selectLastId();
 
-    /* 添加数据 */
-    @Insert("insert into `user` (username, password, email, emailVerifyCode) value (#{username}, #{password}, #{email}, #{emailVerifyCode})")
-    void register(User user);
+    @Update("update `userinfo` set emailActived = 1, username = #{username}, password = #{password}, registerDate = #{registerDate} where email = #{email}")
+    void register_changeStatus(User user);
 
-    /* 更新验证码 */
-    @Update("update `user` set emailVerifyCode = #{emailVerifyCode} where email = #{email}")
-    void updateVerifyCode(User user);
+    @Select("select uuid from `userinfo` where email = #{email}")
+    Integer selectIdByEmail(String email);
 
+    @Select("select * from `userinfo` where email = #{email}")
+    User selectUserInfoByEmail(User user);
 
-    @Update("update `user` set emailActived = 1, emailVerifyCode = 114514, password = #{password}, registerDate = #{registerDate} where email = #{email}")
-    void updateVerifyActiveStatus(User user);
 }

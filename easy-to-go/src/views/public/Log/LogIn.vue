@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-12-12 08:31:33
- * @LastEditTime: 2023-12-27 11:03:46
- * @FilePath: \EasyToGo\easy-to-go\src\views\Log\LogIn.vue
+ * @LastEditTime: 2024-01-14 17:48:15
+ * @FilePath: \easy-to-go\src\views\public\Log\LogIn.vue
 -->
 <script setup>
-import navVue from '../../components/nav.vue';
+import navVue from '../../../components/nav.vue';
 </script>
 
 <template>
@@ -86,8 +86,8 @@ import navVue from '../../components/nav.vue';
 </template>
 
 <script>
-import { requestGet, requestPost } from '@/utils/request.js';
-import Message from '../../components/tips/tips.js';
+import request from '@/utils/request.js';
+import Message from '../../../components/tips/tips.js';
 
 export default {
     data() {
@@ -165,14 +165,14 @@ export default {
         //登录
         submitLogin() {
             if (this.checkIsLegal()) {
-                requestPost('/login', { email: this.data.email, password: this.data.password }).then(res => {
+                request.post('/login', { email: this.data.email, password: this.data.password }).then(res => {
                     console.log(res.data);
                     if (res.data.statusCode != '200') {
                         this.error_info = res.data.msg;
                         this.shake();
                     } else if (res.data.data.token) {
                         Message({ type: 'success', text: '登录成功' });
-                        localStorage.setItem("token", res.data.data.token);
+                        localStorage.setItem("user-data", JSON.stringify(res.data.data));
                         this.error_info = '';
                         this.$router.push('/');
                     } else {
@@ -197,9 +197,10 @@ export default {
                         this.btn_verifycode = '发送验证码';
                         document.getElementsByClassName('btn_type_inline')[0].disabled = false;
                         clearInterval(Timer);
+                        this.btn_cd = 60;
                     } 
                 },1000);
-                requestPost('/checkEmail', { email: this.data.email }).then(res => {
+                request.post('/checkEmail', { email: this.data.email }).then(res => {
                     console.log(res.data);
                     if (res.data.statusCode != '200') {
                         this.error_info = res.data.msg;
@@ -208,6 +209,7 @@ export default {
                         this.btn_cd = 0;
                     } else if (res.data.statusCode == '200') {
                         this.error_info = '';
+                        Message({ type: 'success', text: res.data.msg });
                         /* this.$router.push('/'); */
                     } else {
                         console.log('未知的状态类型,statusCode：', res.data.statusCode);
@@ -223,7 +225,11 @@ export default {
                 this.error_info = '验证码不能为空!';
                 this.shake();
             } else if (this.checkIsLegal()) {
-                requestPost('/register', { email: this.data.email, password: this.data.password, emailVerifyCode: this.data.verifycode }).then(res => {
+                request.post('/register', { 
+                    email: this.data.email, 
+                    password: this.data.password, 
+                    verifyCode: this.data.verifycode 
+                }).then(res => {
                     console.log(res.data);
                     if (res.data.statusCode != '200') {
                         this.error_info = res.data.msg;
@@ -262,7 +268,7 @@ input::placeholder {
     overflow: hidden;
 }
 .mainBody {
-    background: url('../../assets/img/Login_BackgroundImg.png');
+    background: url('@/assets/img/Login_BackgroundImg.png');
     /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
@@ -314,5 +320,12 @@ input::placeholder {
     backdrop-filter: blur(5px);
     box-shadow: var(--shadow-Panel);
     padding: 25px;
+}
+
+a{
+    color: var(--Link-TextColor);
+}
+a:hover{
+    color: var(--Link-TextColor-hover);
 }
 </style>

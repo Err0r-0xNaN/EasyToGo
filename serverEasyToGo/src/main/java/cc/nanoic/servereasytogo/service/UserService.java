@@ -6,7 +6,6 @@ import cc.nanoic.servereasytogo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,36 +23,27 @@ public class UserService {
         return userMapper.selectById(user.getUuid());
     }
 
-    public User selectByEmail(User data) {
-        return userMapper.selectByEmail(data);
+
+    public void register_checkEmail(User user) {
+        userMapper.register_checkEmail(user);
     }
 
-    public List<User> selectAll() {
-        return userMapper.selectAll();
+    public Integer selectLastId() {
+        return userMapper.selectLastId();
     }
 
-    public void register(User user) {
-        try{
-            userMapper.register(user);
-        } catch (Exception e) {
-            throw new ServiceException("写入数据库失败!");
-        }
+    public void register_changeStatus(User user) {
+
+        userMapper.register_changeStatus(user);
     }
 
-    public void updateVerifyCode(User user) {
-        try{
-            userMapper.updateVerifyCode(user);
-        } catch (Exception e) {
-            throw new ServiceException("更新验证码失败!");
-        }
+    public Integer selectIdByEmail(String email) {
+        return userMapper.selectIdByEmail(email);
     }
 
-    public void updateVerifyActive(User user) {
-        try{
-            userMapper.updateVerifyActiveStatus(user);
-        } catch (Exception e) {
-            System.out.println(user.getEmail() + "：更新激活状态失败!\r\nERR0R：" + e.getMessage());
-            throw new ServiceException("更新激活状态失败!请及时将后方错误信息反馈给网站管理员：" + e.getMessage());
-        }
+    public User selectUserInfoByEmail(User user) {
+        return userMapper.selectUserInfoByEmail(user);
     }
+
+
 }

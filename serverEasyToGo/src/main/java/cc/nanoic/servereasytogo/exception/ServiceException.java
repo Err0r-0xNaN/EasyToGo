@@ -1,11 +1,14 @@
 package cc.nanoic.servereasytogo.exception;
 
+import lombok.Getter;
+
 /**
  * @Description:
  * @Author: Nanoic
  * @Date: 2023-12-25
  * @FileName: ServiceException
  **/
+@Getter
 public class ServiceException extends RuntimeException{
 
     private String code;

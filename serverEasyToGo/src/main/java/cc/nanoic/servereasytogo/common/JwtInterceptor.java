@@ -14,6 +14,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
@@ -32,6 +33,13 @@ public class JwtInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         if(StrUtil.isBlank(token)){
             token = request.getParameter("token");
+        }
+        /* 如果有注解直接绕过Token检测 */
+        if(handler instanceof HandlerMethod){
+            AuthAccess annotation = ((HandlerMethod) handler).getMethodAnnotation(AuthAccess.class);
+            if(annotation != null){
+                return true;
+            }
         }
         if(StrUtil.isBlank(token)){
             throw new ServiceException("401", "请先登录! [错误码：Jx01]");

@@ -10,6 +10,7 @@
     
 
     /* // Color // */
+    --Text-Black: #000;
     /* Link */
     --Link-TextColor: #1772f6;
     --Link-TextColor-hover: #1056c1;
@@ -23,26 +24,41 @@
 
     /* Console-Theme */
     --console-panel-dark: #323232;
+
+    /*  */
+    --BackgroundColor-AsideShell: #171717;
     
+}
+ul,li{
+    list-style: none;
 }
 /* 链接 ======================================================================== */
 a{
     text-decoration: none;
-    color: var(--Link-TextColor);
+    /* color: var(--Link-TextColor); */
 }
 a:hover{
-    color: var(--Link-TextColor-hover);
+    /* color: var(--Link-TextColor-hover); */
     /* filter: brightness(130%); */
 }
 /* 自定义 ======================================================================= */
 .flex{
     display: flex;
 }
-
 .contain{
-    width: 1260px;
     height: 100%;
 }
+@media (min-width: 1261px) {
+    .contain{
+        width: 1260px;
+    }
+}
+@media (max-width: 1260px) {
+    .contain{
+        width: 100%;
+    }
+}
+
 
 .marginCenter{
     margin: 0 auto;
